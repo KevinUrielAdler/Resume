@@ -1,155 +1,164 @@
-% Resume
-% Kevin Uriel Manzano Rios
+\documentclass[letterpaper,10pt]{article}
 
-\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{etoolbox}
+\usepackage{bold-extra}
 
-\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
-\usepackage{paracol}
-\usepackage[default]{lato}
+\input{glyphtounicode}
 
-\definecolor{VividPurple}{HTML}{174EA6}
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
-\definecolor{ColorLinks}{HTML}{4285F4}
 
-\colorlet{heading}{VividPurple}
-\colorlet{headingrule}{VividPurple}
-\colorlet{accent}{VividPurple}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
-\renewcommand{\itemmarker}{{\small\textbullet}}
-\renewcommand{\ratingmarker}{\faCircle}
-\renewcommand{\cvDateMarker}{\faCalendar*[regular]}
-\renewcommand{\cvLocationMarker}{\faMapMarker*}
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.2in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
 
-\begin{document}
-\name{Kevin Uriel Manzano Rios}
-\personalinfo{
-  \email{kmanzanor24@gmail.com}
-  \phone{+(52) 56 1748 0590}
-  % \homepage{https://github.com/KevinUrielAdler}
-  \github{KevinUrielAdler}
-  \linkedin{KevinUrielManzanoRios}
-  \location{México}
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
 }
 
-\makecvheader
-\AtBeginEnvironment{itemize}{\small}
-\columnratio{0.6}
-\begin{paracol}{2}
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
 
-  \cvsection{Experience}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
-  \cvachievement{\faRobot}{Artificial Intelligence Systems Analyst at Inbursa}
-  {Developed RAG and SQL-based AI agents using LangGraph and LangChain,
-  integrating LLMs and embedding models through Azure AI Foundry. Built OCR pipelines for large-scale extraction and processing of financial data,
-reducing document content scanning time by 90\% and improving automation and
-document understanding capabilities. Contributed to
-  the definition of development standards adopted by the
-  AI team to improve maintainability, consistency, and engineering practices
-  across projects.}
-  {Feb 2026 -- Present}
-  \divider
+% ========================
+% SECCIONES ESPERADAS
+% ========================
+\newcommand{\ExperienceContent}{}
+\newcommand{\ProjectsContent}{}
+\newcommand{\EducationContent}{}
+\newcommand{\AwardsContent}{}
+\newcommand{\CertificationsContent}{}
+\newcommand{\SkillsLanguages}{}
+\newcommand{\SkillsFrameworks}{}
+\newcommand{\SkillsLLMPlatforms}{}
+\newcommand{\SkillsInfrastructure}{}
+\newcommand{\SkillsDatabases}{}
+\newcommand{\SpokenLanguagesContent}{}
+\newcommand{\AptitudesContent}{}
 
-  \cvachievement{\faLaptopCode}{Python NLP Developer at Rombo Works}
-  {Led the information retrieval team in developing a RAG system for querying
-  the Official Gazette of the Federation of Mexico. Implemented retrieval
-  solutions with Python, vector databases and LLM APIs to deliver structured
-  responses across diverse query types and historical periods.}
-  {Jan 2024 -- Oct 2024}
-  \divider
+% ========================
+% IMPRESIÓN CONDICIONAL: cada sección/subsección solo se
+% imprime si su acumulador de contenido NO está vacío.
+% ========================
+\newcommand{\printListSection}[2]{%
+  \ifdefempty{#2}{}{%
+    \section{#1}
+    \resumeSubHeadingListStart
+    #2
+    \resumeSubHeadingListEnd
+  }%
+}
 
-  \cvachievement{\faChalkboardTeacher}{Competitive Programming Instructor}
-  {Developed and taught lessons on C/C++, algorithms, and problem solving to 60
-  high school students in the Algorithm Club and
-  mentored students preparing for the Mexican Olympiad in Informatics (OMI).}{Aug 2020 -- Aug 2021}
+\newcommand{\printTagLine}[2]{%
+  \ifdefempty{#2}{}{\textbf{#1}{: }#2\\}%
+}
 
-  \cvsection{Relevant Projects}
+\newcommand{\printPlainSection}[2]{%
+  \ifdefempty{#2}{}{%
+    \section{#1}
+    \begin{itemize}[leftmargin=0.15in, label={}]
+      \small\item{#2}
+    \end{itemize}
+  }%
+}
 
-  \cvachievementalt{\faProjectDiagram}  {Neural Architecture Search for Convolutional Networks}
-  {Developed a Neural Architecture Search (NAS) application for convolutional
-  neural networks using bio-inspired optimization algorithms over real and
-  binary encoded search spaces. Integrated surrogate models to predict
-  architecture performance and reduce evaluation cost during the search
-  process. Obtained architectures with performance comparable to the baseline
-  while reducing model size by 99.99\%.}
-  \divider
+% ========================
+% CARGA DEL PERFIL
+% ========================
+\input{milestones/1_experience}
+\input{milestones/2_projects}
+\input{milestones/3_education}
+\input{milestones/4_skills}
+\input{milestones/5_languages}
+\input{milestones/6_aptitudes}
+\input{milestones/7_awards}
+\input{milestones/8_certifications}
 
-  \cvachievementalt{\faBook}{Algorithm Learning Project}
-  {Developed {\href{https://github.com/KevinUrielAdler/Allearning}{\color{ColorLinks}"Allearning"\color{black}}},
-  a platform to teach competitive programming in C++. The application offers users
-  interactive lessons and exercises. To complement the experience and make it
-  accessible from any device, created a
-  {\href{https://github.com/KevinUrielAdler/Allearning-Web}{\color{ColorLinks}
-  web application\color{black}}} using .NET.}
+\input{profiles/general}
 
-  \cvsection{Education}
-  \cvevent{B.S. in Artificial Intelligence Engineering}{Superior School of Computer Sciences (\href{https://en.wikipedia.org/wiki/ESCOM}{\color{ColorLinks}ESCOM, IPN\color{black}})}{Jan 2022 -- Jan 2026}{Av. Juan de Dios Bátiz 46188, CDMX}
-  \begin{itemize}
-    \item Overall Average: 90 out of 100
+% ========================
+% DATOS GENERALES
+% ========================
+\begin{document}
+\setlength{\footskip}{3.60004pt}
+
+\begin{center}
+    {\Huge \scshape Kevin Uriel Manzano Rios} \\ \vspace{2pt}
+    \small México $|$
+    \href{mailto:kmanzanor24@gmail.com}{kmanzanor24@gmail.com} $|$
+    +52 56 1748 0590 $|$
+    \href{https://github.com/KevinUrielAdler}{github.com/KevinUrielAdler} $|$
+    \href{https://linkedin.com/in/KevinUrielManzanoRios}{linkedin.com/in/KevinUrielManzanoRios}
+\end{center}
+
+\printListSection{Experience}{\ExperienceContent}
+\printListSection{Relevant Projects}{\ProjectsContent}
+\printListSection{Education}{\EducationContent}
+
+\newbool{hasSkills}
+\ifdefempty{\SkillsLanguages}{}{\booltrue{hasSkills}}
+\ifdefempty{\SkillsFrameworks}{}{\booltrue{hasSkills}}
+\ifdefempty{\SkillsLLMPlatforms}{}{\booltrue{hasSkills}}
+\ifdefempty{\SkillsInfrastructure}{}{\booltrue{hasSkills}}
+\ifdefempty{\SkillsDatabases}{}{\booltrue{hasSkills}}
+\ifbool{hasSkills}{%
+  \section{Technical Skills}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small\item{%
+      \printTagLine{Languages}{\SkillsLanguages}
+      \printTagLine{Frameworks}{\SkillsFrameworks}
+      \printTagLine{LLM/AI Platforms}{\SkillsLLMPlatforms}
+      \printTagLine{Infrastructure}{\SkillsInfrastructure}
+      \printTagLine{Databases}{\SkillsDatabases}
+    }
   \end{itemize}
-  \divider
+}{}
 
-  \cvevent{{\href{https://drive.google.com/file/d/1U6rwow80xCz0LrepnSFyvGuc5V7Hr1Id/view?usp=sharing}{\color{ColorLinks}Technical Career\color{black}}} in Informatics}{{Center of Scientific and Technological Studies N°13 (\href{https://en.wikipedia.org/wiki/CECyT}{\color{ColorLinks}IPN\color{black}})}}{Aug 2018 -- Aug 2021}{Calz Taxqueña 1620, CDMX}
+\printPlainSection{Spoken Languages}{\SpokenLanguagesContent}
+\printPlainSection{Aptitudes}{\AptitudesContent}
+\printListSection{Awards and Contests}{\AwardsContent}
+\printListSection{Certifications}{\CertificationsContent}
 
-  \switchcolumn
-
-  \cvsection{Technologies}
-  \cvsubsection{Programming Languages}
-  \cvtag{Python (5 years)}
-  \cvtag{C/C++ (5 years)}\\
-  \cvtag{Rust (1 year)}
-  \cvtag{C\# (1 year)}\\
-  \cvsubsection{Frameworks}
-  \cvtag{PyTorch (2 years)}
-  \cvtag{TensorFlow (1 year)}\\
-  \cvtag{LangChain}
-  \cvtag{LangGraph}
-  \cvtag{FastAPI}\\
-  \cvsubsection{Infrastructure}
-  \cvtag{Docker (2 years)}
-  \cvtag{Linux (2 years)}\\
-  \cvtag{Git/GitHub (5 years)}
-  \cvtag{Azure}\\
-  \cvsubsection{Databases}
-  \cvtag{MySQL (2 years)}
-  \cvtag{SQLite (2 years)}\\
-  \cvtag{Chroma DB (1 year)}
-
-  \cvsection{Aptitudes}
-  \cvtag{Teamwork}
-  \cvtag{Communication}\\
-  \cvtag{Software Architecture}
-  \cvtag{Code Optimization}
-  \cvtag{Logical Reasoning}
-  \cvtag{Problem Solving}
-
-  \cvsection{Languages}
-  \begin{tabular}{l | ll}
-    \textbf{Spanish} & Native language\\
-    \textbf{English} & \href{https://drive.google.com/file/d/1gBM0AOUTz7h87_4FS4IsUOT8kphNWD5m/view?usp=sharing}{\color{ColorLinks}B2 - Upper Intermediate (CEFR)\color{black}}\\
-    \textbf{German} & A2 - Elementary (CEFR)
-  \end{tabular}
-
-  \cvsection{Awards and Contests}
-  \cvevent{{\href{https://drive.google.com/file/d/1a9Y24AIVQ5aGS7OPvPD1qg4wDesXFmRi/view?usp=sharing}{\color{ColorLinks}Second Place\color{black}}} (State competition)}{Mexican Olympiad in Informatics ({\href{https://www.olimpiadadeinformatica.org.mx/OMI/OMI/InfoGeneral/Que_es_la_OMI.aspx}{\color{ColorLinks}OMI\color{black}}})}{}{}
-  \begin{itemize}
-    \item Participated in the Mexican Olympiad in Informatics (OMI) and won the silver medal at the state level.
-  \end{itemize}
-  \divider
-
-  \cvevent{International Collegiate Programming Contest}{{\href{https://en.wikipedia.org/wiki/International_Collegiate_Programming_Contest}{\color{ColorLinks}ICPC\color{black}}}}{}{}
-  \begin{itemize}
-    \item Participated in the ICPC in 2020, {\href{https://drive.google.com/file/d/1OwYn_YItOoTw_DI-Dajlrwc_oC57Rv6G/view?usp=sharing}{\color{ColorLinks}our team\color{black}}} reached the top 100 in the finals.
-  \end{itemize}
-
-  \cvsection{Certifications}
-  \cvevent{Python 3 and Azure}{}{}{}
-  \begin{itemize}
-    \item Took an official Microsoft course to get certified in "{\href{https://drive.google.com/file/d/1iRQRtXmNAItFIWmfjOP1m_35C4pAPpTP/view?usp=sharing}{\color{ColorLinks}Microsoft Azure Fundamentals AZ 900\color{black}}}" and a Python course using python 3, SQLite3, and Flask.
-  \end{itemize}
-
-  \newpage
-\end{paracol}
 \end{document}
